@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="mx-auto col-md-11">
-	<h3 class="text-center">Asignar Nuevo Código Genérico de DUREX</h3><hr>
+	<h3 class="text-center">Asignar Nuevo Código Genérico de</h3><hr>
 	<form action="{{ route('durex.store') }}" method="post">
 		@csrf
 		<div id="codGenAsignadoDurex" class="form-row">

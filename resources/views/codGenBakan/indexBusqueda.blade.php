@@ -4,7 +4,7 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div class="card">
-				<div class="card-header">Todos los Códigos Genéricos de Bakan</div>	
+				<div class="card-header">Todos los Códigos Genéricos de Bakan </div>	
 				<div class="card-body">
 					<table class="table table-hover" id="tableRevisionBakan">
 						<thead>

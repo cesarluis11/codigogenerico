@@ -24,7 +24,12 @@ class CodGenericoBakanController extends Controller
         $parteNumero = substr($string, -6, 6)+1; 
         $codigoAsignado = $parteLetras.$parteNumero;
 
-        return view('codGenBakan.create',compact('codigoAsignado'));
+        $rutas = DB::TABLE('ProdRuta')
+                ->SELECT('Ruta','Descripcion')
+                ->WHERE('Categoria','CARPINTERIA')
+                ->GET();
+
+        return view('codGenBakan.create',compact('codigoAsignado','rutas'));
     }
 
     /**
@@ -45,6 +50,7 @@ class CodGenericoBakanController extends Controller
         $codigoCompoCascoDescrip = $request->input('codigoCompoCascoDescrip');
         $codigoComponOAN = $request->input('codigoComponOAN');
         $codigoCompoAONDescrip = $request->input('codigoCompoAONDescrip');
+        $rutaCasco = $request->input('ruta');
         //$solicito = strtoupper($request->input('solicito'));
         $solicito = Auth::user()->name;
         $user = Auth::user();
@@ -52,7 +58,7 @@ class CodGenericoBakanController extends Controller
 
         $insertCodGenMetodo = $this->insertCodGen($codGenerico,$des1CodGenerico,$des2CodGenerico,$solicito,$rol);
         $updatePTASignadoMetodo = $this->updatePTAsig($ptxAsignado,$codGenerico);
-        $insertCompCascoCodGenMetodo = $this->insertCompCascoCodGen($codGenerico,$codigoComponCasco,$codigoCompoCascoDescrip,$solicito,$rol);
+        $insertCompCascoCodGenMetodo = $this->insertCompCascoCodGen($codGenerico,$codigoComponCasco,$codigoCompoCascoDescrip,$solicito,$rol,$rutaCasco);
         $insertCompAonCodGenMetodo = $this->insertCompAonCodGen($codGenerico,$codigoComponOAN,$codigoCompoAONDescrip,$solicito,$rol);
 
         $index = db::table('Art')
@@ -138,7 +144,7 @@ class CodGenericoBakanController extends Controller
                         'EstatusPrecio' => 'NUEVO',
                         'wMostrar' => 1,
                         'SeCompra' => '0',
-                        'SeVende' => 1,
+                        'SeVende' => '0',
                         'EsFormula' => '0',
                         'MultiplosOrdenar' => '1',
                         'AlmacenROP' => 'AL PT',
@@ -200,7 +206,7 @@ class CodGenericoBakanController extends Controller
         }
     }
 
-    public function insertCompCascoCodGen($codGenerico,$codigoComponCasco,$codigoCompoCascoDescrip,$solicito,$rol)
+    public function insertCompCascoCodGen($codGenerico,$codigoComponCasco,$codigoCompoCascoDescrip,$solicito,$rol,$rutaCasco)
     {
         $fecha = Carbon::now()->format('d/m/Y');
         $mensaje = $fecha." ".$solicito;
@@ -257,7 +263,7 @@ class CodGenericoBakanController extends Controller
                         'SeVende' => '0',
                         'EsFormula' => '0',
                         'MultiplosOrdenar' => '1',
-                        'AlmacenROP' => 'ACASCO',
+                        'AlmacenROP' => $rutaCasco[$i],
                         'CategoriaProd' => 'VARIOS GENERICOS',
                         'ProdCantidad' => '1',
                         'ProdUsuario' => '(Mismo)',
@@ -372,7 +378,7 @@ class CodGenericoBakanController extends Controller
                         'SeVende' => '0',
                         'EsFormula' => '0',
                         'MultiplosOrdenar' => '1',
-                        'AlmacenROP' => 'AON',
+                        'AlmacenROP' => 'AL PT',
                         'CategoriaProd' => 'VARIOS GENERICOS',
                         'ProdCantidad' => '1',
                         'ProdUsuario' => '(Mismo)',
@@ -575,5 +581,25 @@ class CodGenericoBakanController extends Controller
 
             
         return view ('codGenBakan.showAddCompGenBakan',compact('getArticulo','getCompArticulos'));
+    }
+
+    public function getRutas()
+    {
+
+        $rutas = DB::TABLE('ProdRuta')
+                ->SELECT('Ruta','Descripcion')
+                ->WHERE('Categoria','CARPINTERIA')
+                ->GET();
+                
+
+        echo '<select class="form-control form-control-sm" name="ruta[]">
+                <option value="">Selecciona una opción...</option>';
+                foreach ($rutas as $ruta) {
+                    echo '<option value="'.$ruta->Ruta.'">'.$ruta->Ruta.'--'.$ruta->Descripcion.'</option>';
+                }
+        echo '</select>';
+
+        // return $rutas;        
+
     }
 }

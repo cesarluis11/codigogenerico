@@ -22,7 +22,8 @@ Route::get('showDescBakan/{articulo}',['as' => 'bakan.showDescBakan','uses' => '
 Route::put('updateDescBakan/{articulo}',['as' => 'bakan.updateDescBakan','uses' => 'CodGenericoBakanController@updateDescBakan']);
 Route::get('indexAddComGenBakan',['as' => 'bakan.indexAddComGenBakan','uses' => 'CodGenericoBakanController@indexAddComGenBakan']);
 Route::get('showAddComGenBakan/{art}',['as' => 'bakan.showAddComGenBakan','uses' => 'CodGenericoBakanController@showAddComGenBakan']);
-
+// getRutas
+Route::get('getRutas',['as'=>'getRuta.getRutas', 'uses' =>'CodGenericoBakanController@getRutas']);
 // seccion de codigos genericos Durex
 Route::get('durexCreate',['as' => 'durex.create','uses' => 'CodGenericoDurexController@create']);
 Route::post('durexStore',['as' => 'durex.store','uses' => 'CodGenericoDurexController@store']);
