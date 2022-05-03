@@ -25,7 +25,7 @@ $(document).ready(function() {
         } else {
             //console.log(ptxAsignado);
             $.ajax({
-                url: 'http://200.30.30.177/codigogenerico/getArticulo',
+                url: 'getArticulo',
                 type: 'GET',
                 data: { ptxAsignado: ptxAsignado },
                 success: function(response) {
@@ -142,7 +142,7 @@ $(document).ready(function() {
     $(agregarCasco).click(function() {
 
         $.ajax({
-            url: 'http://200.30.30.177/codigogenerico/getRutas',
+            url: 'getRutas',
             type: 'GET',
             success: function(response) {
                 if (x < maxComponentes) {
@@ -216,7 +216,7 @@ $(document).ready(function() {
             guardar.click(function(e) {
                 e.preventDefault();
                 $.ajax({
-                    url: 'http://200.30.30.177/codigogenerico/updateRevisionBakan',
+                    url: 'updateRevisionBakan',
                     type: 'get',
                     data: { idCheck: idCheck },
                     success: function(response) {

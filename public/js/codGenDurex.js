@@ -48,7 +48,7 @@ $(document).ready(function() {
 
     $(agregarCasco).click(function() {
         $.ajax({
-            url: 'http://200.30.30.177/codigogenerico/getRutas',
+            url: 'getRutas',
             type: 'GET',
             success: function(response) {
 

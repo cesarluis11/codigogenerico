@@ -18,9 +18,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
     <link rel="shortcut icon" href="#">
 </head>
-<body>
+@if(strpos(url()->current(), asset('login')) !== FALSE)
+<body style="background-image: url('{{ asset('public/images/PANTALLA CHARLIE.jpg')  }}'); background-size: 100%; background-position:0px 30px;">
+@endif
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container-fluid col-md-11">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
