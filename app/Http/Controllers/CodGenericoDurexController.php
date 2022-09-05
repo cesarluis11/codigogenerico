@@ -71,7 +71,7 @@ class CodGenericoDurexController extends Controller
     public function indexBusqueda()
     {
         $index = db::table('Art')
-                ->select('Articulo','Descripcion1','Descripcion2','ClaveFabricante','CodigoAlterno','Linea')
+                ->select('Articulo','Descripcion1','Descripcion2','ClaveFabricante','CodigoAlterno','Linea','Mensaje')
                 ->whereIn('Grupo',['CODIGOS GENERICOS','PRODUCTOS TERMINADOS','CODIGOS GENERICOS COMPONENTES'])
                 ->where([
                     ['Linea','DUREX'],
@@ -508,7 +508,7 @@ class CodGenericoDurexController extends Controller
         $solicito = Auth::user()->name;
         $fecha = Carbon::now()->format('d/m/Y');
         $Mensaje = '';
-        $mensaje ='REV.'.$solicito.' '.$fecha;
+        $mensaje = $fecha." ".$solicito;
 
         $updateArt = db::table('Art')
                     ->where('Articulo',$articulo)
@@ -518,7 +518,7 @@ class CodGenericoDurexController extends Controller
                         'Estatus' => 'ALTA',
                         'Mensaje' => $mensaje
                     ]);
-        return redirect()->route('durex.revision');
+        return redirect()->route('durex.indexBusqueda');
 
     }    
 

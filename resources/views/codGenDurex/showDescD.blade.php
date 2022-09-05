@@ -21,7 +21,7 @@
 		    <input type="text" class="form-control" id="desc2Corregida" name="desc2Corregida" maxlength="240">
 		  </div>
 	  	<button type="submit" class="btn btn-primary btn-sm">Actualizar Descripción</button>
-	  	<a href="{{ route('durex.revision') }}" class="btn btn-danger btn-sm">Regresar/Cancelar</a>
+	  	<a href="{{ URL::previous() }}" class="btn btn-danger btn-sm">Regresar/Cancelar</a>
 	</form>
 </div>
 @stop

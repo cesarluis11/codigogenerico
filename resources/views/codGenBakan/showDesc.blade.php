@@ -12,7 +12,7 @@
 		    <label for="desc1Actual">Descripción 1 Actual </label>
 		    <input type="text" class="form-control" id="desc1Actual" value="{{ $art[0]->Descripcion1 }}" readonly="true">
 		    <label for="desc1Corregida">Descripción 1 Corregida </label>
-		    <input type="text" class="form-control" id="desc1Corregida" name="desc1Corregida" required="true" maxlength="100">
+		    <input type="text" class="form-control" id="desc1Corregida" name="desc1Corregida" required="true" maxlength="100" autocomplete="false">
 	  	</div>
 		  <div class="form-group col-md-10">
 		    <label for="desc2Actual">Descripción 2 Actual </label>
@@ -21,7 +21,7 @@
 		    <input type="text" class="form-control" id="desc2Corregida" name="desc2Corregida" maxlength="240">
 		  </div>
 	  	<button type="submit" class="btn btn-primary btn-sm">Actualizar Descripción</button>
-	  	<a href="{{ route('bakan.revision') }}" class="btn btn-danger btn-sm">Regresar/Cancelar</a>
+	  	<a href="{{ URL::previous() }}" class="btn btn-danger btn-sm">Regresar/Cancelar</a>
 	</form>
 </div>
 @stop

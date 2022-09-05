@@ -15,6 +15,7 @@
 								<th>Descripción 2</th>
 								<th>Clave Fabricante</th>
 								<th>Código Alterno</th>
+								<th>Usuario</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -26,6 +27,13 @@
 									<td>{{ $codigo->Descripcion2 }}</td>
 									<td>{{ $codigo->ClaveFabricante }}</td>
 									<td>{{ $codigo->CodigoAlterno }}</td>
+									<td>
+										@if(substr($codigo->Mensaje, 11) == Auth::user()->name)
+											<a id="{{ $codigo->Articulo }}" href="{{ route('durex.showDescDurex',$codigo->Articulo) }}" class="btn btn-primary btn-sm btn-block editarDesc">Editar</a>
+										@else
+											{{ substr($codigo->Mensaje, 11) }}
+										@endif
+									</td>
 								</tr>
 							@endforeach
 						</tbody>

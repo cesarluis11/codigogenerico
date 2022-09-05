@@ -440,12 +440,12 @@ class CodGenericoBakanController extends Controller
     public function indexBusqueda()
     {
 
-        if (Cache::has('codBakan.all')) {
-            $index = Cache::get('codBakan.all');
-        }else{
+        // if (Cache::has('codBakan.all')) {
+        //     $index = Cache::get('codBakan.all');
+        // }else{
 
             $index = db::table('Art')
-                ->select('Articulo','Descripcion1','Descripcion2','ClaveFabricante','CodigoAlterno','Linea')
+                ->select('Articulo','Descripcion1','Descripcion2','ClaveFabricante','CodigoAlterno','Linea','Mensaje')
                 ->whereIn('Grupo',['CODIGOS GENERICOS','PRODUCTOS TERMINADOS','CODIGOS GENERICOS COMPONENTES'])
                 ->where([
                     ['Linea','BAKAN'],
@@ -455,9 +455,10 @@ class CodGenericoBakanController extends Controller
                     ['Tipo','Normal'],
                 ])
                 ->get();
-            Cache::put('codBakan.all',$index,7200);
+        //     Cache::put('codBakan.all',$index,7200);
                 
-        }                
+        // }                
+        // return $index;
         return view ('codGenBakan.indexBusqueda',compact('index'));
     }
 
@@ -524,7 +525,7 @@ class CodGenericoBakanController extends Controller
         $solicito = Auth::user()->name;
         $fecha = Carbon::now()->format('d/m/Y');
         $Mensaje = '';
-        $mensaje ='REV.'.$solicito.' '.$fecha;
+        $mensaje = $fecha." ".$solicito;
 
         $updateArt = db::table('Art')
                     ->where('Articulo',$articulo)
@@ -535,7 +536,7 @@ class CodGenericoBakanController extends Controller
                         'Mensaje' => $mensaje
                     ]);
         Cache::flush();                       
-        return redirect()->route('bakan.revision');
+        return redirect()->route('bakan.indexBusqueda');
 
     }    
 
@@ -602,4 +603,5 @@ class CodGenericoBakanController extends Controller
         // return $rutas;        
 
     }
+
 }
