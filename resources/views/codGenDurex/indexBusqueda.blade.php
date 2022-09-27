@@ -28,11 +28,11 @@
 									<td>{{ $codigo->ClaveFabricante }}</td>
 									<td>{{ $codigo->CodigoAlterno }}</td>
 									<td>
-										@if(substr($codigo->Mensaje, 11) == Auth::user()->name)
+										{{-- @if(substr($codigo->Mensaje, 11) == Auth::user()->name) --}}
 											<a id="{{ $codigo->Articulo }}" href="{{ route('durex.showDescDurex',$codigo->Articulo) }}" class="btn btn-primary btn-sm btn-block editarDesc">Editar</a>
-										@else
+										{{-- @else
 											{{ substr($codigo->Mensaje, 11) }}
-										@endif
+										@endif --}}
 									</td>
 								</tr>
 							@endforeach
