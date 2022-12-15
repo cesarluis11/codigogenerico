@@ -17,13 +17,15 @@ class CodGenericoBakanController extends Controller
     {   
 
 
-        $codigo = DB::select("SELECT top 1 Articulo FROM Art WHERE Articulo LIKE 'GBAKAN%' ORDER BY Articulo DESC");
+        $codigo = DB::select("SELECT top 1 Articulo FROM Art WHERE Articulo LIKE 'GBAKAN%' ORDER BY Alta DESC");
         $string = $codigo[0]->Articulo;
         //return $string;
-        $parteLetras = substr($string,-13,10);
-        $parteNumero = substr($string, -6, 6)+1; 
+        $parteLetras = substr($string,-14,9);
+        //return $parteLetras;
+        $parteNumero = substr($string, -6, 7)+1; 
+        //return $parteNumero;
         $codigoAsignado = $parteLetras.$parteNumero;
-
+        //return $codigoAsignado;
         $rutas = DB::TABLE('ProdRuta')
                 ->SELECT('Ruta','Descripcion')
                 ->WHERE('Categoria','CARPINTERIA')
