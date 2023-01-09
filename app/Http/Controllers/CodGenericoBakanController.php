@@ -17,7 +17,7 @@ class CodGenericoBakanController extends Controller
     {   
 
 
-        $codigo = DB::select("SELECT top 1 Articulo FROM Art WHERE Articulo LIKE 'GBAKAN%' ORDER BY Alta DESC");
+        $codigo = DB::select("SELECT top 1 Articulo FROM Art WHERE Articulo LIKE 'GBAKAN%' ORDER BY Articulo DESC");
         $string = $codigo[0]->Articulo;
         //return $string;
         $parteLetras = substr($string,-14,9);
